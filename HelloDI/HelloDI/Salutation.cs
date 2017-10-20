@@ -19,5 +19,14 @@ namespace HelloDI
 		{
 			this.writer.Write("Hello DI!");
 		}
+
+		[Fact]
+		public void ExclaimWillWriteCorrectMessageToMessageWriter()
+		{
+			var writerMock = new Mock<IMessageWriter>();
+			var sut = new Salutation(writerMock.Object);
+			sut.Exclaim();
+			writerMock.Verify(w => w.Write("Hello DI!"));
+		}
 	}
 }
